@@ -20,6 +20,7 @@ const swaggerOptions = {
         ]
     },
     apis:[
+        "./src/user/*.js",
     ]
 }
 
