@@ -31,9 +31,9 @@ export const validateJWT = async (req, res, next) =>{
             })
         }
 
-        req.usuario = user
+        req.usuario = user;  
 
-        console.log(user)
+        console.log(user);
         
         next()
     }catch(err){

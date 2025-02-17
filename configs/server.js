@@ -8,6 +8,7 @@ import { dbConnection } from "./mongo.js"
 import apiLimiter from "../src/middlewares/rate-limit-validator.js"
 import { swaggerDocs, swaggerUi } from "./swagger.js"
 import authRoutes from "../src/auth/auth.routes.js"
+import userRoutes from "../src/user/user.routes.js"
 
 
 const middlewares = (app) => {
@@ -21,6 +22,7 @@ const middlewares = (app) => {
 
 const routes = (app) =>{
     app.use("/social-network/v1/auth", authRoutes)
+    app.use("/social-network/v1/user", userRoutes)
     app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 }
 
