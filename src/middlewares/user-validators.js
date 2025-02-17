@@ -27,16 +27,20 @@ export const registerValidator = [
 
 export const loginValidator = [
   body("email")
+    .optional()
     .isEmail()
     .withMessage("El correo electrónico no es válido")
     .normalizeEmail(),
+  body("username")
+    .optional()
+    .isString()
+    .withMessage("El nombre de usuario debe ser una cadena de caracteres"),
   body("password")
     .notEmpty()
     .withMessage("La contraseña es requerida"),
   validarCampos,
   handleErrors,
 ];
-
 
 
 
