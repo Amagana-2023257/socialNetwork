@@ -1,0 +1,313 @@
+{
+	"info": {
+		"_postman_id": "2e57c8e9-ace9-49ca-8571-c2035f8e58a9",
+		"name": "Social Network API Collection",
+		"description": "Colección de endpoints para Auth, User y Category.\n\nBase URL: {{BASE_URL}} (por ejemplo: http://localhost:3000)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "31878676"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Test User",
+									"description": "Nombre del usuario",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "testuser",
+									"description": "Nombre de usuario",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "testuser@example.com",
+									"description": "Correo electrónico",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password123",
+									"description": "Contraseña (mínimo 6 caracteres)",
+									"type": "text"
+								},
+								{
+									"key": "profilePicture",
+									"value": "",
+									"type": "file"
+								}
+							]
+						},
+						"url": "{{BASE_URL}}/social-network/v1/auth/register"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"SuperSecret123\"\n}"
+						},
+						"url": "{{BASE_URL}}/social-network/v1/auth/login"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get User Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": "{{BASE_URL}}/social-network/v1/user"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Updated Name",
+									"description": "Nuevo nombre",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "updated@example.com",
+									"description": "Nuevo correo",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "newpassword123",
+									"description": "Contraseña actual (para validación)",
+									"type": "text"
+								},
+								{
+									"key": "newPassword",
+									"value": "newpassword123",
+									"description": "Nueva contraseña",
+									"type": "text"
+								},
+								{
+									"key": "profilePicture",
+									"value": "",
+									"type": "file"
+								}
+							]
+						},
+						"url": "{{BASE_URL}}/social-network/v1/user/update-profile"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Get All Categories",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I4MWI5OTBkZGQwZjNkZjY1NGRiYTEiLCJpYXQiOjE3NDAxMjM4ODksImV4cCI6MTc0MDEyNzQ4OX0.XI7ezXX0-LwE5-F1zF-qe7SDwS_MARKglErdd4BIPVk"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": "{{BASE_URL}}/social-network/v1/category"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category By ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I4MWI5OTBkZGQwZjNkZjY1NGRiYTEiLCJpYXQiOjE3NDAxMjM4ODksImV4cCI6MTc0MDEyNzQ4OX0.XI7ezXX0-LwE5-F1zF-qe7SDwS_MARKglErdd4BIPVk"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": "{{BASE_URL}}/social-network/v1/category/getCategoryById/67b835d3ea4b1ac5685b2c64"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I4MWI5OTBkZGQwZjNkZjY1NGRiYTEiLCJpYXQiOjE3NDAxMjM4ODksImV4cCI6MTc0MDEyNzQ4OX0.XI7ezXX0-LwE5-F1zF-qe7SDwS_MARKglErdd4BIPVk"
+							}
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Updated Category",
+									"description": "Nuevo nombre de la categoría",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Updated description",
+									"description": "Nueva descripción",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "true",
+									"description": "Estado (true o false)",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{BASE_URL}}/social-network/v1/category/updateCategory/67b835d3ea4b1ac5685b2c64"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I4MWI5OTBkZGQwZjNkZjY1NGRiYTEiLCJpYXQiOjE3NDAxMjM4ODksImV4cCI6MTc0MDEyNzQ4OX0.XI7ezXX0-LwE5-F1zF-qe7SDwS_MARKglErdd4BIPVk"
+							}
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": "{{BASE_URL}}/social-network/v1/category/deleteCategory/67b835d3ea4b1ac5685b2c64"
+					},
+					"response": []
+				},
+				{
+					"name": "Activate Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I4MWI5OTBkZGQwZjNkZjY1NGRiYTEiLCJpYXQiOjE3NDAxMjM4ODksImV4cCI6MTc0MDEyNzQ4OX0.XI7ezXX0-LwE5-F1zF-qe7SDwS_MARKglErdd4BIPVk"
+							}
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": "{{BASE_URL}}/social-network/v1/category/activateCategory/67b835d3ea4b1ac5685b2c64"
+					},
+					"response": []
+				},
+				{
+					"name": "AddCategory",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I4MWI5OTBkZGQwZjNkZjY1NGRiYTEiLCJpYXQiOjE3NDAxMjM4ODksImV4cCI6MTc0MDEyNzQ4OX0.XI7ezXX0-LwE5-F1zF-qe7SDwS_MARKglErdd4BIPVk"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Nueva Categoría\",\r\n  \"description\": \"Descripción de la categoría\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/social-network/v1/category/addCategory"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:3000"
+		},
+		{
+			"key": "TOKEN",
+			"value": ""
+		}
+	]
+}
