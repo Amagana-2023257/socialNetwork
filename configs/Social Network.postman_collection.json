@@ -1,72 +1,199 @@
 {
 	"info": {
-		"_postman_id": "3af1d15f-d757-47d8-82d8-e62c0c5bf410",
-		"name": "Social Network",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-		"_exporter_id": "37589008"
+	  "_postman_id": "d2b8f3a0-1234-5678-9012-abcdef123456",
+	  "name": "Social Network API Collection",
+	  "description": "Colección de endpoints para Auth y User.\n\nBase URL: {{BASE_URL}} (por ejemplo: http://localhost:3000)",
+	  "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
-		{
-			"name": "auth",
-			"item": [
+	  {
+		"name": "Auth",
+		"item": [
+		  {
+			"name": "Register",
+			"request": {
+			  "method": "POST",
+			  "header": [],
+			  "body": {
+				"mode": "formdata",
+				"formdata": [
+				  {
+					"key": "name",
+					"value": "Test User",
+					"type": "text",
+					"description": "Nombre del usuario"
+				  },
+				  {
+					"key": "username",
+					"value": "testuser",
+					"type": "text",
+					"description": "Nombre de usuario"
+				  },
+				  {
+					"key": "email",
+					"value": "testuser@example.com",
+					"type": "text",
+					"description": "Correo electrónico"
+				  },
+				  {
+					"key": "password",
+					"value": "password123",
+					"type": "text",
+					"description": "Contraseña (mínimo 6 caracteres)"
+				  },
+				  {
+					"key": "profilePicture",
+					"type": "file",
+					"src": ""
+				  }
+				]
+			  },
+			  "url": {
+				"raw": "{{BASE_URL}}/social-network/v1/auth/register",
+				"host": [
+				  "{{BASE_URL}}"
+				],
+				"path": [
+				  "social-network",
+				  "v1",
+				  "auth",
+				  "register"
+				]
+			  }
+			},
+			"response": []
+		  },
+		  {
+			"name": "Login",
+			"request": {
+			  "method": "POST",
+			  "header": [
 				{
-					"name": "register",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "username",
-									"value": "Amagana",
-									"type": "text"
-								},
-								{
-									"key": "email",
-									"value": "amagana@kinal.edu.gt",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "Chinito2,000",
-									"type": "text"
-								},
-								{
-									"key": "profilePicture",
-									"type": "file",
-									"src": "/C:/Users/Informatica/Pictures/images.jpg"
-								},
-								{
-									"key": "name",
-									"value": "Angel",
-									"type": "text"
-								}
-							]
-						},
-						"url": "http://localhost:3000/social-network/v1/auth/register"
-					},
-					"response": []
-				},
-				{
-					"name": "login",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"username\" : \"Amagana\",\r\n    \"password\" : \"Chinito2,000\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:3000/social-network/v1/auth/login"
-					},
-					"response": []
+				  "key": "Content-Type",
+				  "value": "application/json"
 				}
-			]
-		}
+			  ],
+			  "body": {
+				"mode": "raw",
+				"raw": "{\n    \"email\": \"testuser@example.com\",\n    \"password\": \"password123\"\n}"
+			  },
+			  "url": {
+				"raw": "{{BASE_URL}}/social-network/v1/auth/login",
+				"host": [
+				  "{{BASE_URL}}"
+				],
+				"path": [
+				  "social-network",
+				  "v1",
+				  "auth",
+				  "login"
+				]
+			  }
+			},
+			"response": []
+		  }
+		]
+	  },
+	  {
+		"name": "User",
+		"item": [
+		  {
+			"name": "Get User Profile",
+			"request": {
+			  "method": "GET",
+			  "header": [
+				{
+				  "key": "Authorization",
+				  "value": "Bearer {{TOKEN}}",
+				  "type": "text"
+				}
+			  ],
+			  "url": {
+				"raw": "{{BASE_URL}}/social-network/v1/user",
+				"host": [
+				  "{{BASE_URL}}"
+				],
+				"path": [
+				  "social-network",
+				  "v1",
+				  "user"
+				]
+			  }
+			},
+			"response": []
+		  },
+		  {
+			"name": "Update User Profile",
+			"request": {
+			  "method": "PUT",
+			  "header": [
+				{
+				  "key": "Authorization",
+				  "value": "Bearer {{TOKEN}}",
+				  "type": "text"
+				}
+			  ],
+			  "body": {
+				"mode": "formdata",
+				"formdata": [
+				  {
+					"key": "name",
+					"value": "Updated Name",
+					"type": "text",
+					"description": "Nuevo nombre"
+				  },
+				  {
+					"key": "email",
+					"value": "updated@example.com",
+					"type": "text",
+					"description": "Nuevo correo"
+				  },
+				  {
+					"key": "password",
+					"value": "newpassword123",
+					"type": "text",
+					"description": "Nueva contraseña (mínimo 6 caracteres)"
+				  },
+				  {
+					"key": "newPassword",
+					"value": "newpassword123",
+					"type": "text",
+					"description": "Confirma la nueva contraseña"
+				  },
+				  {
+					"key": "profilePicture",
+					"type": "file",
+					"src": ""
+				  }
+				]
+			  },
+			  "url": {
+				"raw": "{{BASE_URL}}/social-network/v1/user/update-profile",
+				"host": [
+				  "{{BASE_URL}}"
+				],
+				"path": [
+				  "social-network",
+				  "v1",
+				  "user",
+				  "update-profile"
+				]
+			  }
+			},
+			"response": []
+		  }
+		]
+	  }
+	],
+	"variable": [
+	  {
+		"key": "BASE_URL",
+		"value": "http://localhost:3000"
+	  },
+	  {
+		"key": "TOKEN",
+		"value": ""
+	  }
 	]
-}
+  }
+  
