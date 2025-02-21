@@ -1,8 +1,8 @@
 {
 	"info": {
-		"_postman_id": "2e57c8e9-ace9-49ca-8571-c2035f8e58a9",
-		"name": "Social Network API Collection",
-		"description": "Colección de endpoints para Auth, User y Category.\n\nBase URL: {{BASE_URL}} (por ejemplo: http://localhost:3000)",
+		"_postman_id": "a6091097-ef9e-4c98-bea6-b5b88f694d5d",
+		"name": "Social Network API Collection Copy 3",
+		"description": "Colección de endpoints para Auth, User, Category y Post.\n\nBase URL: {{BASE_URL}} (por ejemplo: http://localhost:3000)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "31878676"
 	},
@@ -148,12 +148,6 @@
 				{
 					"name": "Get All Categories",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": {
-								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I4MWI5OTBkZGQwZjNkZjY1NGRiYTEiLCJpYXQiOjE3NDAxMjM4ODksImV4cCI6MTc0MDEyNzQ4OX0.XI7ezXX0-LwE5-F1zF-qe7SDwS_MARKglErdd4BIPVk"
-							}
-						},
 						"method": "GET",
 						"header": [
 							{
@@ -167,14 +161,32 @@
 					"response": []
 				},
 				{
-					"name": "Get Category By ID",
+					"name": "Add Category",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": {
-								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I4MWI5OTBkZGQwZjNkZjY1NGRiYTEiLCJpYXQiOjE3NDAxMjM4ODksImV4cCI6MTc0MDEyNzQ4OX0.XI7ezXX0-LwE5-F1zF-qe7SDwS_MARKglErdd4BIPVk"
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Nueva Categoría\",\r\n  \"description\": \"Descripción de la categoría\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
 							}
 						},
+						"url": "{{BASE_URL}}/social-network/v1/category/addCategory"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category By ID",
+					"request": {
 						"method": "GET",
 						"header": [
 							{
@@ -183,19 +195,13 @@
 								"type": "text"
 							}
 						],
-						"url": "{{BASE_URL}}/social-network/v1/category/getCategoryById/67b835d3ea4b1ac5685b2c64"
+						"url": "{{BASE_URL}}/social-network/v1/category/getCategoryById/INSERT_CATEGORY_ID_HERE"
 					},
 					"response": []
 				},
 				{
 					"name": "Update Category",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": {
-								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I4MWI5OTBkZGQwZjNkZjY1NGRiYTEiLCJpYXQiOjE3NDAxMjM4ODksImV4cCI6MTc0MDEyNzQ4OX0.XI7ezXX0-LwE5-F1zF-qe7SDwS_MARKglErdd4BIPVk"
-							}
-						},
 						"method": "PUT",
 						"header": [
 							{
@@ -227,19 +233,13 @@
 								}
 							]
 						},
-						"url": "{{BASE_URL}}/social-network/v1/category/updateCategory/67b835d3ea4b1ac5685b2c64"
+						"url": "{{BASE_URL}}/social-network/v1/category/updateCategory/INSERT_CATEGORY_ID_HERE"
 					},
 					"response": []
 				},
 				{
 					"name": "Delete Category",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": {
-								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I4MWI5OTBkZGQwZjNkZjY1NGRiYTEiLCJpYXQiOjE3NDAxMjM4ODksImV4cCI6MTc0MDEyNzQ4OX0.XI7ezXX0-LwE5-F1zF-qe7SDwS_MARKglErdd4BIPVk"
-							}
-						},
 						"method": "DELETE",
 						"header": [
 							{
@@ -248,19 +248,13 @@
 								"type": "text"
 							}
 						],
-						"url": "{{BASE_URL}}/social-network/v1/category/deleteCategory/67b835d3ea4b1ac5685b2c64"
+						"url": "{{BASE_URL}}/social-network/v1/category/deleteCategory/INSERT_CATEGORY_ID_HERE"
 					},
 					"response": []
 				},
 				{
 					"name": "Activate Category",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": {
-								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I4MWI5OTBkZGQwZjNkZjY1NGRiYTEiLCJpYXQiOjE3NDAxMjM4ODksImV4cCI6MTc0MDEyNzQ4OX0.XI7ezXX0-LwE5-F1zF-qe7SDwS_MARKglErdd4BIPVk"
-							}
-						},
 						"method": "PATCH",
 						"header": [
 							{
@@ -269,31 +263,105 @@
 								"type": "text"
 							}
 						],
-						"url": "{{BASE_URL}}/social-network/v1/category/activateCategory/67b835d3ea4b1ac5685b2c64"
+						"url": "{{BASE_URL}}/social-network/v1/category/activateCategory/INSERT_CATEGORY_ID_HERE"
 					},
 					"response": []
-				},
+				}
+			]
+		},
+		{
+			"name": "Post",
+			"item": [
 				{
-					"name": "AddCategory",
+					"name": "Create Post",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": {
-								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I4MWI5OTBkZGQwZjNkZjY1NGRiYTEiLCJpYXQiOjE3NDAxMjM4ODksImV4cCI6MTc0MDEyNzQ4OX0.XI7ezXX0-LwE5-F1zF-qe7SDwS_MARKglErdd4BIPVk"
-							}
-						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Nueva Categoría\",\r\n  \"description\": \"Descripción de la categoría\"\r\n}\r\n",
+							"raw": "{\n  \"title\": \"Mi Primera Publicación\",\n  \"category\": \"INSERT_CATEGORY_ID_HERE\",\n  \"body\": \"Este es el contenido de mi publicación\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:3000/social-network/v1/category/addCategory"
+						"url": "{{BASE_URL}}/social-network/v1/post"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Post",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Post Actualizado\",\n  \"category\": \"INSERT_CATEGORY_ID_HERE\",\n  \"body\": \"Contenido actualizado de la publicación\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/social-network/v1/post/INSERT_POST_ID_HERE"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Post",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": "{{BASE_URL}}/social-network/v1/post/INSERT_POST_ID_HERE"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Post By ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": "{{BASE_URL}}/social-network/v1/post/INSERT_POST_ID_HERE"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Posts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": "{{BASE_URL}}/social-network/v1/post"
 					},
 					"response": []
 				}
