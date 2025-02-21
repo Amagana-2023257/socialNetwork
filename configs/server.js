@@ -10,6 +10,7 @@ import { swaggerDocs, swaggerUi } from "./swagger.js";
 import authRoutes from "../src/auth/auth.routes.js";
 import userRoutes from "../src/user/user.routes.js";
 import postRoutes from "../src/post/post.routes.js";
+import commentRoutes from "../src/comment/comment.routes.js";
 import categoryRoutes from "../src/category/category.routes.js";
 import { createAdminUser } from "../src/auth/auth.controller.js"; // Importamos la función
 
@@ -26,6 +27,7 @@ const routes = (app) => {
     app.use("/social-network/v1/auth", authRoutes);
     app.use("/social-network/v1/user", userRoutes);
     app.use("/social-network/v1/post", postRoutes);
+    app.use("/social-network/v1/comment", commentRoutes);
     app.use("/social-network/v1/category", categoryRoutes);
     app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 };

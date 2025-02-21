@@ -1,8 +1,8 @@
 {
 	"info": {
-		"_postman_id": "a6091097-ef9e-4c98-bea6-b5b88f694d5d",
-		"name": "Social Network API Collection Copy 3",
-		"description": "Colección de endpoints para Auth, User, Category y Post.\n\nBase URL: {{BASE_URL}} (por ejemplo: http://localhost:3000)",
+		"_postman_id": "08f2b4eb-ff06-4727-bcf9-83099a222f9a",
+		"name": "Social Network API Collection Copy 4",
+		"description": "Colección de endpoints para Auth, User, Category, Post y Comment.\n\nBase URL: {{BASE_URL}} (por ejemplo: http://localhost:3000)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "31878676"
 	},
@@ -362,6 +362,104 @@
 							}
 						],
 						"url": "{{BASE_URL}}/social-network/v1/post"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comment",
+			"item": [
+				{
+					"name": "Create Comment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"text\": \"Este es un comentario\",\n  \"post\": \"INSERT_POST_ID_HERE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/social-network/v1/comment"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Comment",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"text\": \"Comentario actualizado\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/social-network/v1/comment/INSERT_COMMENT_ID_HERE"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Comment",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": "{{BASE_URL}}/social-network/v1/comment/INSERT_COMMENT_ID_HERE"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Comment By ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": "{{BASE_URL}}/social-network/v1/comment/INSERT_COMMENT_ID_HERE"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Comments By Post",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": "{{BASE_URL}}/social-network/v1/comment/post/INSERT_POST_ID_HERE"
 					},
 					"response": []
 				}

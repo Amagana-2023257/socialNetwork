@@ -7,7 +7,6 @@ import Post from "./post.model.js";
  */
 export const createPost = async (req, res) => {
   try {
-    // Se obtiene el ID del usuario desde req.user o req.usuario
     const uid = req.user?.id || req.usuario?._id;
     if (!uid) {
       return res.status(401).json({
@@ -26,8 +25,8 @@ export const createPost = async (req, res) => {
       title: title.trim(),
       category,
       body,
-      author: uid,  // Se utiliza el ID del usuario autenticado
-      status: true  // La publicación se crea como activa
+      author: uid,  
+      status: true  
     });
 
     await post.save();
@@ -118,7 +117,6 @@ export const deletePost = async (req, res) => {
       });
     }
 
-    // Soft delete: cambiar status a false
     post.status = false;
     await post.save();
 
