@@ -1,9 +1,45 @@
 import Post from "./post.model.js";
 
 /**
- * Crear una nueva publicación.
- * Los usuarios pueden crear publicaciones para expresar sus opiniones.
- * Cada publicación debe incluir título, categoría y contenido principal.
+ * @swagger
+ * tags:
+ *   name: Post
+ *   description: Operaciones relacionadas con publicaciones
+ */
+
+/**
+ * @swagger
+ * /posts:
+ *   post:
+ *     summary: Crear una nueva publicación
+ *     tags: [Post]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 description: Título de la publicación
+ *               category:
+ *                 type: string
+ *                 description: ID de la categoría de la publicación
+ *               body:
+ *                 type: string
+ *                 description: Contenido principal de la publicación
+ *     responses:
+ *       201:
+ *         description: Publicación creada exitosamente
+ *       400:
+ *         description: Todos los campos son obligatorios
+ *       401:
+ *         description: Token de usuario no encontrado
+ *       500:
+ *         description: Error creando la publicación
  */
 export const createPost = async (req, res) => {
   try {
@@ -44,8 +80,49 @@ export const createPost = async (req, res) => {
 };
 
 /**
- * Actualizar una publicación por ID.
- * Solo el autor de la publicación puede editarla.
+ * @swagger
+ * /posts/{id}:
+ *   put:
+ *     summary: Actualizar una publicación por ID
+ *     tags: [Post]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID de la publicación
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 description: Título de la publicación
+ *               category:
+ *                 type: string
+ *                 description: ID de la categoría de la publicación
+ *               body:
+ *                 type: string
+ *                 description: Contenido principal de la publicación
+ *     responses:
+ *       200:
+ *         description: Publicación actualizada exitosamente
+ *       400:
+ *         description: Solicitud incorrecta
+ *       401:
+ *         description: Token de usuario no encontrado
+ *       403:
+ *         description: No tienes permiso para actualizar esta publicación
+ *       404:
+ *         description: Publicación no encontrada
+ *       500:
+ *         description: Error actualizando la publicación
  */
 export const updatePost = async (req, res) => {
   try {
@@ -90,9 +167,31 @@ export const updatePost = async (req, res) => {
 };
 
 /**
- * "Eliminar" (desactivar) una publicación por ID.
- * En lugar de eliminar físicamente la publicación, se realiza un soft delete (status a false).
- * Solo el autor de la publicación puede realizar esta acción.
+ * @swagger
+ * /posts/{id}:
+ *   delete:
+ *     summary: Eliminar (desactivar) una publicación por ID
+ *     tags: [Post]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID de la publicación
+ *     responses:
+ *       200:
+ *         description: Publicación desactivada exitosamente
+ *       401:
+ *         description: Token de usuario no encontrado
+ *       403:
+ *         description: No tienes permiso para eliminar esta publicación
+ *       404:
+ *         description: Publicación no encontrada
+ *       500:
+ *         description: Error eliminando (desactivando) la publicación
  */
 export const deletePost = async (req, res) => {
   try {
@@ -133,7 +232,31 @@ export const deletePost = async (req, res) => {
 };
 
 /**
- * Obtener una publicación por ID.
+ * @swagger
+ * /posts/{id}:
+ *   get:
+ *     summary: Obtener una publicación por ID
+ *     tags: [Post]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID de la publicación
+ *     responses:
+ *       200:
+ *         description: Publicación obtenida exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Post'
+ *       404:
+ *         description: Publicación no encontrada
+ *       500:
+ *         description: Error obteniendo la publicación
  */
 export const getPostById = async (req, res) => {
   try {
@@ -159,7 +282,24 @@ export const getPostById = async (req, res) => {
 };
 
 /**
- * Obtener todas las publicaciones.
+ * @swagger
+ * /posts:
+ *   get:
+ *     summary: Obtener todas las publicaciones
+ *     tags: [Post]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Lista de publicaciones obtenida exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Post'
+ *       500:
+ *         description: Error obteniendo las publicaciones
  */
 export const getAllPosts = async (req, res) => {
   try {

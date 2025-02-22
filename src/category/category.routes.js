@@ -19,20 +19,70 @@ import { hasRoles } from "../middlewares/validate-roles.js";
 
 const router = Router();
 
-/*
-  GET / - Obtener todas las categorías.
-  Se permite a cualquier usuario autenticado visualizar las categorías.
-*/
+/**
+ * @swagger
+ * tags:
+ *   name: Category
+ *   description: Operaciones relacionadas con categorías
+ */
+
+/**
+ * @swagger
+ * /categories:
+ *   get:
+ *     summary: Obtener todas las categorías
+ *     tags: [Category]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Lista de categorías obtenida exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Category'
+ *       401:
+ *         description: No autorizado
+ */
 router.get(
   "/",
   validateJWT,
   getAllCategories
 );
 
-/*
-  POST /addCategory - Crear una nueva categoría.
-  Solo el administrador (rol ADMIN) puede agregar categorías.
-*/
+/**
+ * @swagger
+ * /categories/addCategory:
+ *   post:
+ *     summary: Crear una nueva categoría
+ *     tags: [Category]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: Nombre de la categoría
+ *               description:
+ *                 type: string
+ *                 description: Descripción de la categoría
+ *     responses:
+ *       201:
+ *         description: Categoría creada exitosamente
+ *       400:
+ *         description: Solicitud incorrecta
+ *       401:
+ *         description: No autorizado
+ *       403:
+ *         description: Prohibido
+ */
 router.post(
   "/addCategory",
   validateJWT,
@@ -41,10 +91,35 @@ router.post(
   addCategory
 );
 
-/*
-  GET /getCategoryById/:id - Obtener una categoría por ID.
-  Solo el administrador tiene acceso a este endpoint (opcional, se puede ajustar si se desea que otros usuarios puedan visualizar).
-*/
+/**
+ * @swagger
+ * /categories/getCategoryById/{id}:
+ *   get:
+ *     summary: Obtener una categoría por ID
+ *     tags: [Category]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID de la categoría
+ *     responses:
+ *       200:
+ *         description: Categoría obtenida exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Category'
+ *       401:
+ *         description: No autorizado
+ *       403:
+ *         description: Prohibido
+ *       404:
+ *         description: Categoría no encontrada
+ */
 router.get(
   "/getCategoryById/:id",
   validateJWT,
@@ -53,10 +128,46 @@ router.get(
   getCategoryById
 );
 
-/*
-  PUT /updateCategory/:id - Actualizar una categoría por ID.
-  Solo el administrador puede editar las categorías.
-*/
+/**
+ * @swagger
+ * /categories/updateCategory/{id}:
+ *   put:
+ *     summary: Actualizar una categoría por ID
+ *     tags: [Category]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID de la categoría
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: Nombre de la categoría
+ *               description:
+ *                 type: string
+ *                 description: Descripción de la categoría
+ *     responses:
+ *       200:
+ *         description: Categoría actualizada exitosamente
+ *       400:
+ *         description: Solicitud incorrecta
+ *       401:
+ *         description: No autorizado
+ *       403:
+ *         description: Prohibido
+ *       404:
+ *         description: Categoría no encontrada
+ */
 router.put(
   "/updateCategory/:id",
   validateJWT,
@@ -65,10 +176,33 @@ router.put(
   updateCategory
 );
 
-/*
-  DELETE /deleteCategory/:id - Eliminar (desactivar) una categoría.
-  Solo el administrador puede eliminar categorías. Se evita eliminar la categoría por defecto.
-*/
+/**
+ * @swagger
+ * /categories/deleteCategory/{id}:
+ *   delete:
+ *     summary: Eliminar (desactivar) una categoría
+ *     tags: [Category]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID de la categoría
+ *     responses:
+ *       200:
+ *         description: Categoría desactivada exitosamente
+ *       400:
+ *         description: Solicitud incorrecta
+ *       401:
+ *         description: No autorizado
+ *       403:
+ *         description: Prohibido
+ *       404:
+ *         description: Categoría no encontrada
+ */
 router.delete(
   "/deleteCategory/:id",
   validateJWT,
@@ -77,10 +211,33 @@ router.delete(
   deleteCategory
 );
 
-/*
-  PATCH /activateCategory/:id - Activar una categoría previamente eliminada.
-  Solo el administrador puede reactivar una categoría.
-*/
+/**
+ * @swagger
+ * /categories/activateCategory/{id}:
+ *   patch:
+ *     summary: Activar una categoría previamente eliminada
+ *     tags: [Category]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID de la categoría
+ *     responses:
+ *       200:
+ *         description: Categoría activada exitosamente
+ *       400:
+ *         description: Solicitud incorrecta
+ *       401:
+ *         description: No autorizado
+ *       403:
+ *         description: Prohibido
+ *       404:
+ *         description: Categoría no encontrada
+ */
 router.patch(
   "/activateCategory/:id",
   validateJWT,

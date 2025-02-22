@@ -19,8 +19,42 @@ import {
 const router = Router();
 
 /**
- * Crear un nuevo comentario.
- * Solo usuarios autenticados con rol ADMIN o USER pueden crear comentarios.
+ * @swagger
+ * tags:
+ *   name: Comment
+ *   description: Operaciones relacionadas con comentarios
+ */
+
+/**
+ * @swagger
+ * /comments:
+ *   post:
+ *     summary: Crear un nuevo comentario
+ *     tags: [Comment]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               postId:
+ *                 type: string
+ *                 description: ID de la publicación a la que pertenece el comentario
+ *               content:
+ *                 type: string
+ *                 description: Contenido del comentario
+ *     responses:
+ *       201:
+ *         description: Comentario creado exitosamente
+ *       400:
+ *         description: Solicitud incorrecta
+ *       401:
+ *         description: No autorizado
+ *       403:
+ *         description: Prohibido
  */
 router.post(
   "/",
@@ -31,8 +65,41 @@ router.post(
 );
 
 /**
- * Actualizar un comentario por ID.
- * Solo el autor del comentario (con rol ADMIN o USER) puede editarlo.
+ * @swagger
+ * /comments/{id}:
+ *   put:
+ *     summary: Actualizar un comentario por ID
+ *     tags: [Comment]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID del comentario
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               content:
+ *                 type: string
+ *                 description: Contenido del comentario
+ *     responses:
+ *       200:
+ *         description: Comentario actualizado exitosamente
+ *       400:
+ *         description: Solicitud incorrecta
+ *       401:
+ *         description: No autorizado
+ *       403:
+ *         description: Prohibido
+ *       404:
+ *         description: Comentario no encontrado
  */
 router.put(
   "/:id",
@@ -43,8 +110,29 @@ router.put(
 );
 
 /**
- * Eliminar (desactivar) un comentario por ID.
- * Solo el autor del comentario (con rol ADMIN o USER) puede eliminarlo.
+ * @swagger
+ * /comments/{id}:
+ *   delete:
+ *     summary: Eliminar (desactivar) un comentario por ID
+ *     tags: [Comment]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID del comentario
+ *     responses:
+ *       200:
+ *         description: Comentario desactivado exitosamente
+ *       401:
+ *         description: No autorizado
+ *       403:
+ *         description: Prohibido
+ *       404:
+ *         description: Comentario no encontrado
  */
 router.delete(
   "/:id",
@@ -55,8 +143,33 @@ router.delete(
 );
 
 /**
- * Obtener un comentario por ID.
- * Este endpoint requiere autenticación y rol ADMIN o USER.
+ * @swagger
+ * /comments/{id}:
+ *   get:
+ *     summary: Obtener un comentario por ID
+ *     tags: [Comment]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID del comentario
+ *     responses:
+ *       200:
+ *         description: Comentario obtenido exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Comment'
+ *       401:
+ *         description: No autorizado
+ *       403:
+ *         description: Prohibido
+ *       404:
+ *         description: Comentario no encontrado
  */
 router.get(
   "/:id",
@@ -67,8 +180,33 @@ router.get(
 );
 
 /**
- * Obtener todos los comentarios de una publicación.
- * Este endpoint requiere autenticación y rol ADMIN o USER.
+ * @swagger
+ * /comments/post/{postId}:
+ *   get:
+ *     summary: Obtener todos los comentarios de una publicación
+ *     tags: [Comment]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: postId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID de la publicación
+ *     responses:
+ *       200:
+ *         description: Lista de comentarios obtenida exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Comment'
+ *       401:
+ *         description: No autorizado
+ *       403:
+ *         description: Prohibido
  */
 router.get(
   "/post/:postId",

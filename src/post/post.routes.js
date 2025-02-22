@@ -18,8 +18,42 @@ import {
 const router = Router();
 
 /**
- * Crear una nueva publicación.
- * Solo usuarios autenticados con rol ADMIN o USER pueden crear publicaciones.
+ * @swagger
+ * tags:
+ *   name: Post
+ *   description: Operaciones relacionadas con publicaciones
+ */
+
+/**
+ * @swagger
+ * /posts:
+ *   post:
+ *     summary: Crear una nueva publicación
+ *     tags: [Post]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 description: Título de la publicación
+ *               content:
+ *                 type: string
+ *                 description: Contenido de la publicación
+ *     responses:
+ *       201:
+ *         description: Publicación creada exitosamente
+ *       400:
+ *         description: Solicitud incorrecta
+ *       401:
+ *         description: No autorizado
+ *       403:
+ *         description: Prohibido
  */
 router.post(
   "/",
@@ -30,8 +64,44 @@ router.post(
 );
 
 /**
- * Actualizar una publicación por ID.
- * Solo el autor de la publicación (que tenga rol ADMIN o USER) puede actualizarla.
+ * @swagger
+ * /posts/{id}:
+ *   put:
+ *     summary: Actualizar una publicación por ID
+ *     tags: [Post]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID de la publicación
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 description: Título de la publicación
+ *               content:
+ *                 type: string
+ *                 description: Contenido de la publicación
+ *     responses:
+ *       200:
+ *         description: Publicación actualizada exitosamente
+ *       400:
+ *         description: Solicitud incorrecta
+ *       401:
+ *         description: No autorizado
+ *       403:
+ *         description: Prohibido
+ *       404:
+ *         description: Publicación no encontrada
  */
 router.put(
   "/:id",
@@ -42,8 +112,31 @@ router.put(
 );
 
 /**
- * Eliminar una publicación por ID.
- * Solo el autor de la publicación (que tenga rol ADMIN o USER) puede eliminarla.
+ * @swagger
+ * /posts/{id}:
+ *   delete:
+ *     summary: Eliminar una publicación por ID
+ *     tags: [Post]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID de la publicación
+ *     responses:
+ *       200:
+ *         description: Publicación eliminada exitosamente
+ *       400:
+ *         description: Solicitud incorrecta
+ *       401:
+ *         description: No autorizado
+ *       403:
+ *         description: Prohibido
+ *       404:
+ *         description: Publicación no encontrada
  */
 router.delete(
   "/:id",
@@ -54,8 +147,35 @@ router.delete(
 );
 
 /**
- * Obtener una publicación por ID.
- * Este endpoint requiere autenticación y rol (ADMIN o USER).
+ * @swagger
+ * /posts/{id}:
+ *   get:
+ *     summary: Obtener una publicación por ID
+ *     tags: [Post]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID de la publicación
+ *     responses:
+ *       200:
+ *         description: Publicación obtenida exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Post'
+ *       400:
+ *         description: Solicitud incorrecta
+ *       401:
+ *         description: No autorizado
+ *       403:
+ *         description: Prohibido
+ *       404:
+ *         description: Publicación no encontrada
  */
 router.get(
   "/:id",
@@ -66,8 +186,26 @@ router.get(
 );
 
 /**
- * Obtener todas las publicaciones.
- * Este endpoint requiere autenticación y rol (ADMIN o USER).
+ * @swagger
+ * /posts:
+ *   get:
+ *     summary: Obtener todas las publicaciones
+ *     tags: [Post]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Lista de publicaciones obtenida exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Post'
+ *       401:
+ *         description: No autorizado
+ *       403:
+ *         description: Prohibido
  */
 router.get(
   "/",

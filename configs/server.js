@@ -12,7 +12,7 @@ import userRoutes from "../src/user/user.routes.js";
 import postRoutes from "../src/post/post.routes.js";
 import commentRoutes from "../src/comment/comment.routes.js";
 import categoryRoutes from "../src/category/category.routes.js";
-import { createAdminUser } from "../src/auth/auth.controller.js"; // Importamos la función
+import { createAdminUser } from "../src/auth/auth.controller.js"; 
 
 const middlewares = (app) => {
     app.use(express.urlencoded({ extended: false }));

@@ -2,7 +2,16 @@ import { hash, verify } from "argon2";
 import User from "../user/user.model.js";
 import { generateJWT } from "../helpers/generate-jwt.js";
 
-// Función para crear el usuario admin si no existe
+/**
+ * @swagger
+ * tags:
+ *   name: Auth
+ *   description: Operaciones de autenticación
+ */
+
+/**
+ * Función para crear el usuario admin si no existe
+ */
 export const createAdminUser = async () => {
   try {
     const adminEmail = process.env.ADMIN_EMAIL;
@@ -41,8 +50,42 @@ export const createAdminUser = async () => {
   }
 };
 
-// ----- Registro y Login existentes -----
-
+/**
+ * @swagger
+ * /auth/register:
+ *   post:
+ *     summary: Registrar un nuevo usuario
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: Nombre del usuario
+ *               username:
+ *                 type: string
+ *                 description: Nombre de usuario
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 description: Correo electrónico del usuario
+ *               password:
+ *                 type: string
+ *                 description: Contraseña del usuario
+ *               profilePicture:
+ *                 type: string
+ *                 format: binary
+ *                 description: Foto de perfil del usuario
+ *     responses:
+ *       201:
+ *         description: Usuario creado exitosamente
+ *       500:
+ *         description: Error en el registro del usuario
+ */
 export const register = async (req, res) => {
   try {
     const data = req.body;
@@ -68,6 +111,37 @@ export const register = async (req, res) => {
   }
 };
 
+/**
+ * @swagger
+ * /auth/login:
+ *   post:
+ *     summary: Iniciar sesión
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 description: Correo electrónico del usuario
+ *               username:
+ *                 type: string
+ *                 description: Nombre de usuario
+ *               password:
+ *                 type: string
+ *                 description: Contraseña del usuario
+ *     responses:
+ *       200:
+ *         description: Inicio de sesión exitoso
+ *       400:
+ *         description: Credenciales inválidas
+ *       500:
+ *         description: Error en el inicio de sesión
+ */
 export const login = async (req, res) => {
   const { email, username, password } = req.body;
   try {

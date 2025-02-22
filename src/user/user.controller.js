@@ -3,7 +3,33 @@ import { hash, verify } from "argon2";
 import User from "../user/user.model.js";
 
 /**
- * Obtener el perfil de un usuario
+ * @swagger
+ * tags:
+ *   name: User
+ *   description: Operaciones relacionadas con usuarios
+ */
+
+/**
+ * @swagger
+ * /user:
+ *   get:
+ *     summary: Obtener el perfil de un usuario
+ *     tags: [User]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Perfil del usuario obtenido exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
+ *       401:
+ *         description: Token de usuario no encontrado
+ *       404:
+ *         description: Usuario no encontrado
+ *       500:
+ *         description: Error al obtener el perfil del usuario
  */
 export const getUserProfile = async (req, res) => {
   try {
@@ -40,7 +66,48 @@ export const getUserProfile = async (req, res) => {
 };
 
 /**
- * Actualizar el perfil de un usuario (nombre de usuario, contraseña, foto de perfil)
+ * @swagger
+ * /user/update-profile:
+ *   put:
+ *     summary: Actualizar el perfil de un usuario (nombre de usuario, contraseña, foto de perfil)
+ *     tags: [User]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *                 description: Nombre de usuario
+ *               password:
+ *                 type: string
+ *                 description: Contraseña actual del usuario
+ *               newPassword:
+ *                 type: string
+ *                 description: Nueva contraseña del usuario
+ *               profilePicture:
+ *                 type: string
+ *                 format: binary
+ *                 description: Foto de perfil del usuario
+ *     responses:
+ *       200:
+ *         description: Perfil del usuario actualizado exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
+ *       400:
+ *         description: Contraseña inválida
+ *       401:
+ *         description: Token de usuario no encontrado
+ *       404:
+ *         description: Usuario no encontrado
+ *       500:
+ *         description: Error al actualizar el perfil del usuario
  */
 export const updateUserProfile = async (req, res) => {
   try {

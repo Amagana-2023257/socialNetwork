@@ -15,13 +15,16 @@ const swaggerOptions = {
         },
         servers:[
             {
-                url: "http://127.0.0.1:3000/ventas/v1"
+                url: "http://127.0.0.1:3000/social-network/v1"
             }
         ]
     },
     apis:[
         "./src/user/*.js",
         "./src/auth/*.js",
+        "./src/category/*.js",
+        "./src/comment/*.js",
+        "./src/post/*.js",
     ]
 }
 

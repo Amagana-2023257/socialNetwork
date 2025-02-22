@@ -1,8 +1,40 @@
 import Category from "./category.model.js";
 
 /**
- * Crear una nueva categoría.
- * Solo el administrador puede crear nuevas categorías.
+ * @swagger
+ * tags:
+ *   name: Category
+ *   description: Operaciones relacionadas con categorías
+ */
+
+/**
+ * @swagger
+ * /categories/addCategory:
+ *   post:
+ *     summary: Crear una nueva categoría
+ *     tags: [Category]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: Nombre de la categoría
+ *               description:
+ *                 type: string
+ *                 description: Descripción de la categoría
+ *     responses:
+ *       201:
+ *         description: Categoría creada exitosamente
+ *       400:
+ *         description: La categoría ya existe
+ *       500:
+ *         description: Error creando la categoría
  */
 export const addCategory = async (req, res) => {
   try {
@@ -35,7 +67,24 @@ export const addCategory = async (req, res) => {
 };
 
 /**
- * Obtener todas las categorías.
+ * @swagger
+ * /categories:
+ *   get:
+ *     summary: Obtener todas las categorías
+ *     tags: [Category]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Lista de categorías obtenida exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Category'
+ *       500:
+ *         description: Error obteniendo las categorías
  */
 export const getAllCategories = async (req, res) => {
   try {
@@ -54,7 +103,31 @@ export const getAllCategories = async (req, res) => {
 };
 
 /**
- * Obtener una categoría por ID.
+ * @swagger
+ * /categories/getCategoryById/{id}:
+ *   get:
+ *     summary: Obtener una categoría por ID
+ *     tags: [Category]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID de la categoría
+ *     responses:
+ *       200:
+ *         description: Categoría obtenida exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Category'
+ *       404:
+ *         description: Categoría no encontrada
+ *       500:
+ *         description: Error obteniendo la categoría
  */
 export const getCategoryById = async (req, res) => {
   try {
@@ -78,7 +151,43 @@ export const getCategoryById = async (req, res) => {
 };
 
 /**
- * Actualizar una categoría por ID.
+ * @swagger
+ * /categories/updateCategory/{id}:
+ *   put:
+ *     summary: Actualizar una categoría por ID
+ *     tags: [Category]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID de la categoría
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: Nombre de la categoría
+ *               description:
+ *                 type: string
+ *                 description: Descripción de la categoría
+ *               status:
+ *                 type: boolean
+ *                 description: Estado de la categoría
+ *     responses:
+ *       200:
+ *         description: Categoría actualizada exitosamente
+ *       404:
+ *         description: Categoría no encontrada
+ *       500:
+ *         description: Error actualizando la categoría
  */
 export const updateCategory = async (req, res) => {
   try {
@@ -111,9 +220,29 @@ export const updateCategory = async (req, res) => {
 };
 
 /**
- * Eliminar (desactivar) una categoría.
- * Se realiza un soft delete estableciendo status a false.
- * No se permite eliminar la categoría por defecto.
+ * @swagger
+ * /categories/deleteCategory/{id}:
+ *   delete:
+ *     summary: Eliminar (desactivar) una categoría
+ *     tags: [Category]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID de la categoría
+ *     responses:
+ *       200:
+ *         description: Categoría desactivada exitosamente
+ *       400:
+ *         description: No se puede eliminar la categoría por defecto
+ *       404:
+ *         description: Categoría no encontrada
+ *       500:
+ *         description: Error eliminando la categoría
  */
 export const deleteCategory = async (req, res) => {
   try {
@@ -147,7 +276,27 @@ export const deleteCategory = async (req, res) => {
 };
 
 /**
- * Activar una categoría (estableciendo status a true).
+ * @swagger
+ * /categories/activateCategory/{id}:
+ *   patch:
+ *     summary: Activar una categoría previamente eliminada
+ *     tags: [Category]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID de la categoría
+ *     responses:
+ *       200:
+ *         description: Categoría activada exitosamente
+ *       404:
+ *         description: Categoría no encontrada
+ *       500:
+ *         description: Error activando la categoría
  */
 export const activateCategory = async (req, res) => {
   try {
